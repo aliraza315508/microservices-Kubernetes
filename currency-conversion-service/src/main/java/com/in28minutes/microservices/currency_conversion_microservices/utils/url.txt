@@ -1,0 +1,14 @@
+//Currency Exchange Service
+http://localhost:8000/currency-exchange/from/USD/to/INR
+
+//Currency Conversion Service
+http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
+
+//naming-server
+http://localhost:8761/
+
+//zipkin
+http://localhost:9411/
+
+//h2-console
+http://localhost:8000/h2-console/

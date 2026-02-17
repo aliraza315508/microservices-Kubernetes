@@ -1,0 +1,10 @@
+//Currency Exchange Service
+http://localhost:8000/currency-exchange/from/USD/to/INR
+
+//naming-server
+http://localhost:8761/
+
+//zipkin
+http://localhost:9411/
+
+
