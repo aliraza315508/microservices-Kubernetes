@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: currency-conversion
+  namespace: currency-system
+  labels:
+    app: currency-conversion
+
+spec:
+
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: currency-conversion
+
+  template:
+    metadata:
+      labels:
+        app: currency-conversion
+
+    spec:
+      containers:
+        - name: currency-conversion
+          image: YOUR_REGISTRY/currency-conversion-service:latest
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 8100
+
+          env:
+            - name: SERVER_PORT
+              value: "8100"
+
+            - name:  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+
+
+
+
+            - name: CONFIG_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: CONFIG_SERVER_URL
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "300m"
+              memory: "512Mi"
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8100
+            initialDelaySeconds: 25
+            periodSeconds: 10
+
+
+          livenessProbe:
+            httpGet:
+              port: 8100
+              path: /actuator/health
+            initialDelaySeconds: 45
+            periodSeconds: 20

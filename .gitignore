@@ -1,0 +1,36 @@
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build output
+**/target/
+**/build/
+
+# Logs
+*.log
+run.log
+run.err
+
+# Maven wrapper cache
+.mvn/wrapper/maven-wrapper.jar
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+**/application-local.properties
+**/secrets*.yaml
+!k8s/common/secrets.yaml
+!k8s/common/secrets.example.yaml
+
+# Terraform / state
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Kubernetes local overrides
+k8s/**/overrides/

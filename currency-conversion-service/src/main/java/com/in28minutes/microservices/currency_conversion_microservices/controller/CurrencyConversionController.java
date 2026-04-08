@@ -2,8 +2,6 @@ package com.in28minutes.microservices.currency_conversion_microservices.controll
 
 import com.in28minutes.microservices.currency_conversion_microservices.entity.CurrencyConversion;
 import com.in28minutes.microservices.currency_conversion_microservices.proxy.CurrencyExchangeProxy;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,19 +15,15 @@ import java.util.HashMap;
 @RestController
 public class CurrencyConversionController {
 
-    private Logger logger = LoggerFactory.getLogger(CurrencyConversionController.class);
-
     @Autowired
     private CurrencyExchangeProxy proxy ;
 
-    @GetMapping("/currency-conversion-microservices/from/{from}/to/{to}/quantity/{quantity}")
+    @GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversion calculateCurrencyConversion(
             @PathVariable String from,
             @PathVariable String to ,
             @PathVariable BigDecimal quantity
             ){
-
-        logger.info("calculateCurrencyConversion called with {} to {} with {}", from, to, quantity);
 
         HashMap<String , String> uriVariables = new HashMap<>() ;
         uriVariables.put("from" , from) ;
@@ -56,14 +50,13 @@ public class CurrencyConversionController {
 
 
 
-    @GetMapping("/currency-conversion-microservices-feign/from/{from}/to/{to}/quantity/{quantity}")
+    @GetMapping("/currency-conversion-feign/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversion calculateCurrencyConversionFeign(
             @PathVariable String from,
             @PathVariable String to ,
             @PathVariable BigDecimal quantity
     ){
 
-        logger.info("calculateCurrencyConversionFeign called with {} to {} with {}", from, to, quantity);
 
         CurrencyConversion currencyConversion =
                 proxy.retrieveExchangeValue(from, to) ;

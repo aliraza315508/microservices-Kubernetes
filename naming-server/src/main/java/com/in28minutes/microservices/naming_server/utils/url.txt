@@ -1,0 +1,5 @@
+//naming-server
+http://localhost:8761/
+
+//zipkin
+http://localhost:9411/

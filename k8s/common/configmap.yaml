@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: common-config
+  namespace: currency-system
+
+data:
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://naming-server:8761/eureka"
+  CONFIG_SERVER_URL: ""
+  DB_HOST: "CHANGE_ME_DB_HOST"
+  DB_PORT: "5432"
+  DB_NAME: "CHANGE_ME_DB_NAME"
